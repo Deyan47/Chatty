@@ -1,7 +1,7 @@
 import React from "react";
 
 import { ChannelList, useChatContext } from "stream-chat-react";
-import { ChannelSearch, TeamChannelList, TeamChannelPreview } from ".";
+import { ChannelSearch, TeamChannelList, TeamChannelPreview } from "./";
 import Cookies from "universal-cookie";
 import ChatIcon from "../assets/ChatIcon.png";
 import LogoutIcon from "../assets/logout.png";
@@ -21,10 +21,36 @@ const SideBar = () => (
   </div>
 );
 
+const CompanyHeader = () =>(
+  <div className="channel-list__header">
+    <p className="channel-list__header__text">Chatty</p>
+  </div>
+)
+
 const ChannelListContainer = () => {
   return (
     <>
       <SideBar />
+      <div className="channel-list__list__wrapper">
+        <CompanyHeader/>
+        <ChannelSearch />
+        <ChannelList
+          filters={{}}
+          channelRenderFilterFn={()=> {}}
+          List={(listProps)=>(
+            <TeamChannelList
+              {...listProps}
+              type="team"
+            />
+          )}
+          Preview={(previewProps)=>(
+            <TeamChannelPreview
+              {...previewProps}
+              type="team"
+            />
+          )}
+        />
+      </div>
     </>
   );
 };
